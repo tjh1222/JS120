@@ -143,7 +143,7 @@ class Hand {
 
 
 class Deck {
-  static ranks = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+  static ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
   static suits = ['♡', '♢', '♤', '♧'];
   constructor() {
     this.cards = this.shuffle(this.newCards());
@@ -415,6 +415,13 @@ class TwentyOneGame {
     });
   }
 
+  resetMoney() {
+    let players = this.removeDealers();
+    players.forEach(player => {
+      player.money = TwentyOneGame.STARTING_MONEY;
+    });
+  }
+
   start() {
 
     this.displayWelcomeMessage();
@@ -435,6 +442,7 @@ class TwentyOneGame {
 
       }
       if (!this.playAgain()) break;
+      this.resetMoney();
     }
     this.displayGoodbyeMessage();
   }
